@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyFireControll : MonoBehaviour {
+
+
+    public GameObject[] Pos;
+    public GameObject Bullet;
+
+    public float StartDelay = 1.0f;
+    public float delayTime = 1.0f;
+
+    void Start()
+    {
+        InvokeRepeating("Fire", StartDelay, delayTime); // 일정시간 후 메소드 실행(반복)
+    }
+
+    void Fire()
+    {
+        for (int i = 0; i < Pos.Length; i++)
+        {
+            Instantiate(Bullet, Pos[i].transform.position, Pos[i].transform.rotation);
+        }
+    } // 총알 생성
+}
