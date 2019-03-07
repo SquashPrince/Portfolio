@@ -1,0 +1,89 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class PlayerControll : MonoBehaviour {
+
+    public int P_HP = 10;
+    public int P_initHP = 10;
+
+    public Rigidbody2D RB;
+    public float P_Speed = 300f;
+
+    public Transform TR;
+
+    public GameObject hpBar;
+
+    public GameObject deadEffect;
+
+    float xPos;
+    float yPos;
+
+    void Awake()
+    {
+        P_HP = P_initHP;
+    }
+
+    void Update () {
+        // 이동 설정
+        xPos = Input.GetAxis("Horizontal");
+        yPos = Input.GetAxis("Vertical");
+
+        Vector2 dir = new Vector2(xPos, yPos);
+        RB.velocity = dir * P_Speed * Time.deltaTime;
+
+        
+
+        // 화면 이동 제한
+        float size = Camera.main.orthographicSize;
+        float offset = 0.25f;
+
+        if(TR.position.y >= size - offset)
+        {
+            TR.position = new Vector3(TR.position.x, size - offset, 0);
+        }
+        if (TR.position.y <= -size + offset)
+        {
+            TR.position = new Vector3(TR.position.x, -size + offset, 0);
+        }
+
+        float ScreenRatio = (float)Screen.width / (float)Screen.height;
+        float wSize = Camera.main.orthographicSize * ScreenRatio;
+
+
+        if (TR.position.x >= wSize - offset)
+        {
+            TR.position = new Vector3(wSize - offset, TR.position.y, 0);
+        }
+        if (TR.position.x <= -wSize + offset)
+        {
+            TR.position = new Vector3(-wSize + offset, TR.position.y, 0);
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.CompareTag("E_Bullet"))
+        {
+            P_HP--;
+            hpBar.GetComponent<Image>().fillAmount -= 0.1f;
+        } // 적 총알에 피격
+
+        if (coll.CompareTag("Item"))
+        {
+            P_HP += 2;
+            hpBar.GetComponent<Image>().fillAmount += 0.2f;
+            if (P_HP > 10)
+            {
+                P_HP = 10;
+            }
+        } // 아이템 획득(미구현)
+    }
+
+    public void DeadEnd()
+    {
+        SceneManager.LoadScene("EndScene"); // 사망
+    }
+}
