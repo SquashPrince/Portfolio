@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyBulletPos : MonoBehaviour {
+
+    public GameObject target;
+
+    public float bulletSpeed = 5f;
+
+    void Start()
+    {
+        target = GameObject.Find("Player"); // 타겟지정
+
+        Vector2 dir = (target.transform.position - transform.position).normalized; // 총알이 나갈 방향 벡터, 노말라이즈드
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.eulerAngles = new Vector3(0, 0, angle - 90f); // 각도를 조정
+    }    
+
+    void Update ()
+    {
+        transform.Translate(Vector2.up * bulletSpeed * Time.deltaTime); // 총알의 발사
+    }
+
+}
