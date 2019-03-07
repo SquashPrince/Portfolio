@@ -1,0 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraOption : MonoBehaviour {
+
+    void Awake()
+    {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep; // 화면이 꺼지지 않음(모바일)
+        Screen.SetResolution(540, 960, false); // 9:16 비율. 무조건 창모드
+    }
+}
