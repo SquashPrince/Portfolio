@@ -1,0 +1,342 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class RespawnManager : MonoBehaviour {
+
+    public GameObject enemy_OBJ;
+    public GameObject boss_OBJ;
+    public GameObject wall_OBJ;
+
+    public GameObject[] RespawnTR;
+
+    public Text warnning;
+
+    void Start() {
+        boss_OBJ = GameObject.Find("Boss");
+        boss_OBJ.SetActive(false);
+        wall_OBJ = GameObject.Find("Wall");
+        wall_OBJ.SetActive(false);
+
+        StartCoroutine("RespawnEnemyScenario");
+    }
+
+    IEnumerator RespawnEnemyScenario()
+    {
+        
+        yield return new WaitForSeconds(3.0f);
+        
+        for (int k = 0; k < 2; k++)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, RespawnTR[6].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[2].transform.position));
+            }
+
+            yield return new WaitForSeconds(1.0f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, RespawnTR[6].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[1].transform.position));
+            }
+
+            yield return new WaitForSeconds(1.0f);
+
+            for (int i = 0; i < 3; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                float j = 0.5f;
+                Instantiate(enemy_OBJ, new Vector3(RespawnTR[6].transform.position.x - j + (i * j), RespawnTR[6].transform.position.y), Quaternion.identity);
+            }
+
+            yield return new WaitForSeconds(1.0f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, RespawnTR[6].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[2].transform.position));
+            }
+
+            yield return new WaitForSeconds(1.0f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, RespawnTR[7].transform.position, Quaternion.identity);
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, RespawnTR[4].transform.position, Quaternion.AngleAxis(90, Vector3.forward));
+            }
+
+            yield return new WaitForSeconds(0.25f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                float j = 0.5f;
+                Instantiate(enemy_OBJ, new Vector3(RespawnTR[8].transform.position.x, RespawnTR[8].transform.position.y - j), Quaternion.AngleAxis(-90, Vector3.forward));
+            }
+
+            yield return new WaitForSeconds(1.0f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, new Vector3(RespawnTR[6].transform.position.x - 1.0f, RespawnTR[6].transform.position.y), Quaternion.LookRotation(Vector3.forward, -RespawnTR[0].transform.position));
+            }
+
+            yield return new WaitForSeconds(0.125f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, new Vector3(RespawnTR[6].transform.position.x - 0.5f, RespawnTR[6].transform.position.y), Quaternion.LookRotation(Vector3.forward, -RespawnTR[0].transform.position));
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, new Vector3(RespawnTR[6].transform.position.x + 1.0f, RespawnTR[6].transform.position.y), Quaternion.LookRotation(Vector3.forward, -RespawnTR[3].transform.position));
+            }
+
+            yield return new WaitForSeconds(0.125f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, new Vector3(RespawnTR[6].transform.position.x + 0.5f, RespawnTR[6].transform.position.y), Quaternion.LookRotation(Vector3.forward, -RespawnTR[3].transform.position));
+            }
+
+            yield return new WaitForSeconds(1.0f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, RespawnTR[7].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[2].transform.position));
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            for (int i = 0; i < 6; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                float j = 1.0f;
+                Instantiate(enemy_OBJ, new Vector3(RespawnTR[5].transform.position.x + (i * j), RespawnTR[6].transform.position.y), Quaternion.identity);
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, RespawnTR[4].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[0].transform.position));
+            }
+
+            yield return new WaitForSeconds(0.125f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, RespawnTR[8].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[3].transform.position));
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, RespawnTR[8].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[3].transform.position));
+            }
+
+            yield return new WaitForSeconds(0.125f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, RespawnTR[4].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[0].transform.position));
+            }
+
+            yield return new WaitForSeconds(1.0f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(0.15f);
+                Instantiate(enemy_OBJ, RespawnTR[6].transform.position, Quaternion.identity);
+            }
+            yield return new WaitForSeconds(1.0f);
+
+        }
+
+        yield return new WaitForSeconds(5.0f);
+        
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, RespawnTR[6].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[2].transform.position));
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, RespawnTR[6].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[1].transform.position));
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < 3; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            float j = 0.5f;
+            Instantiate(enemy_OBJ, new Vector3(RespawnTR[6].transform.position.x - j + (i * j), RespawnTR[6].transform.position.y), Quaternion.identity);
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, RespawnTR[6].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[2].transform.position));
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, RespawnTR[7].transform.position, Quaternion.identity);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, RespawnTR[4].transform.position, Quaternion.AngleAxis(90, Vector3.forward));
+        }
+
+        yield return new WaitForSeconds(0.25f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            float j = 0.5f;
+            Instantiate(enemy_OBJ, new Vector3(RespawnTR[8].transform.position.x, RespawnTR[8].transform.position.y - j), Quaternion.AngleAxis(-90, Vector3.forward));
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, new Vector3(RespawnTR[6].transform.position.x - 1.0f, RespawnTR[6].transform.position.y), Quaternion.LookRotation(Vector3.forward, -RespawnTR[0].transform.position));
+        }
+
+        yield return new WaitForSeconds(0.125f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, new Vector3(RespawnTR[6].transform.position.x - 0.5f, RespawnTR[6].transform.position.y), Quaternion.LookRotation(Vector3.forward, -RespawnTR[0].transform.position));
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, new Vector3(RespawnTR[6].transform.position.x + 1.0f, RespawnTR[6].transform.position.y), Quaternion.LookRotation(Vector3.forward, -RespawnTR[3].transform.position));
+        }
+
+        yield return new WaitForSeconds(0.125f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, new Vector3(RespawnTR[6].transform.position.x + 0.5f, RespawnTR[6].transform.position.y), Quaternion.LookRotation(Vector3.forward, -RespawnTR[3].transform.position));
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, RespawnTR[7].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[2].transform.position));
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < 6; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            float j = 1.0f;
+            Instantiate(enemy_OBJ, new Vector3(RespawnTR[5].transform.position.x + (i * j), RespawnTR[6].transform.position.y), Quaternion.identity);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, RespawnTR[4].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[0].transform.position));
+        }
+
+        yield return new WaitForSeconds(0.125f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, RespawnTR[8].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[3].transform.position));
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, RespawnTR[8].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[3].transform.position));
+        }
+
+        yield return new WaitForSeconds(0.125f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, RespawnTR[4].transform.position, Quaternion.LookRotation(Vector3.forward, -RespawnTR[0].transform.position));
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            Instantiate(enemy_OBJ, RespawnTR[6].transform.position, Quaternion.identity);
+        }
+        yield return new WaitForSeconds(3.0f);
+        
+        wall_OBJ.SetActive(true);  // 벽
+        
+        yield return new WaitForSeconds(10.0f);
+
+        warnning.fontSize = 36;
+        warnning.text = "<color=#ff0000>" + "W A R N N I N G ! !" + "</color>";
+
+        yield return new WaitForSeconds(5.0f);
+
+        warnning.fontSize = 56;
+        warnning.text = "";
+        
+        boss_OBJ.SetActive(true); // 보스
+    }
+}
