@@ -1,0 +1,87 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BossControll : MonoBehaviour {
+
+    public bool onOffSwich = false;
+
+    public int E_HP = 500;
+    public int initE_HP = 500;
+
+    public float BossFowardSpeed = 0.5f;
+    public float BossSideSpeed = 0f;
+    public float levelRater = 1;
+
+    public Vector3 ZigZagFlag = Vector3.zero;
+
+    public Transform TR;
+    public GameObject effect;
+    public GameObject manager;
+
+    public AudioClip hitSound;
+    public AudioSource audSource;
+
+    void Start()
+    {   
+    }
+
+    void Update()
+    {
+        TR.Translate(Vector3.down * BossFowardSpeed * Time.deltaTime);
+
+        if(TR.transform.position.y <= 3.5f && onOffSwich == false)
+        {
+            onOffSwich = true;
+            BossFowardSpeed = 0;
+
+            ZigZagFlag = Vector3.right;
+            BossSideSpeed = 1f;
+        }
+
+        TR.Translate(ZigZagFlag * BossSideSpeed * levelRater * Time.deltaTime); // 적의 이동
+
+        if (onOffSwich == true)
+        {
+            if (TR.transform.position.x >= 1.2)
+            {
+                ZigZagFlag = Vector3.left;
+            }
+            else if (TR.transform.position.x <= -1.2)
+            {
+                ZigZagFlag = Vector3.right;
+            }
+        }
+
+        if (100 < E_HP && E_HP <= 200)
+        {
+            GetComponent<BossFireControll>().coolTime = 0.75f;
+            levelRater = 2f;
+        }
+
+        if (E_HP <= 100)
+        {
+            GetComponent<BossFireControll>().coolTime = 0.5f;
+            levelRater = 3f;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if(coll.CompareTag("P_Bullet"))
+        {
+            GameManager.score += 50;
+            E_HP--;
+            audSource.PlayOneShot(hitSound, 0.3f);
+            if (E_HP == 0)
+            {
+                GameManager.score += 5000;
+
+                manager.GetComponent<GameManager>().clearSwitch = true;
+
+                Instantiate(effect, TR.position, Quaternion.identity);
+                Destroy(this.gameObject);
+            }
+        } // 플레이어의 총알에 피격
+    }
+}
