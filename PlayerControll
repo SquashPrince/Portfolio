@@ -13,10 +13,14 @@ public class PlayerControll : MonoBehaviour {
     public float P_Speed = 300f;
 
     public Transform TR;
+    public GameObject wallTR;
 
     public GameObject hpBar;
 
+    public GameObject itemGetEffect;
     public GameObject deadEffect;
+
+    public GameObject manager;
 
     float xPos;
     float yPos;
@@ -24,6 +28,9 @@ public class PlayerControll : MonoBehaviour {
     void Awake()
     {
         P_HP = P_initHP;
+        manager = GameObject.Find("GameManager");
+        hpBar = GameObject.Find("HP_Bar");
+        wallTR = GameObject.Find("Wall");
     }
 
     void Update () {
@@ -61,6 +68,12 @@ public class PlayerControll : MonoBehaviour {
         {
             TR.position = new Vector3(-wSize + offset, TR.position.y, 0);
         }
+
+        // 벽 충돌 제한
+        if (wallTR.transform.position.y - TR.position.y <= 0.8f)
+        {
+            TR.position = new Vector3(TR.position.x, wallTR.transform.position.y - 0.8f);
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D coll)
@@ -69,6 +82,16 @@ public class PlayerControll : MonoBehaviour {
         {
             P_HP--;
             hpBar.GetComponent<Image>().fillAmount -= 0.1f;
+            if (P_HP == 0)
+            {
+                GameManager.score += 5000;
+
+                manager.GetComponent<GameManager>().deadSwitch = true;
+
+                Instantiate(deadEffect, TR.position, Quaternion.identity);
+                Destroy(this.gameObject);
+            }
+
         } // 적 총알에 피격
 
         if (coll.CompareTag("Item"))
@@ -79,11 +102,9 @@ public class PlayerControll : MonoBehaviour {
             {
                 P_HP = 10;
             }
-        } // 아이템 획득(미구현)
-    }
+            GetComponent<FireControll>().PosLength = 4; // 아이템 획득 [파츠강화]
+            Instantiate(itemGetEffect, TR.position, Quaternion.identity);
 
-    public void DeadEnd()
-    {
-        SceneManager.LoadScene("EndScene"); // 사망
+        } // 아이템 획득
     }
 }
