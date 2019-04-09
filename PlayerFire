@@ -7,29 +7,23 @@ public class FireControll : MonoBehaviour {
     public GameObject[] Pos;
     public GameObject Bullet;
 
-    public float delayTime = 0.1f;
-    float CoolTIme;
+    public int PosLength = 2;
 
     public AudioClip shootSound;
     public AudioSource audioSource;
 
     void Update () {
-        CoolTIme += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (CoolTIme >= delayTime)
-            {   
-                Fire();
-                CoolTIme = 0;
-            } // 쿨타임 설정
+            Fire();
         }
 	}
 
     void Fire()
     {
         audioSource.PlayOneShot(shootSound, 0.5f);
-        for (int i = 0; i < Pos.Length; i++)
+        for (int i = 0; i < PosLength; i++)
         {
             Instantiate(Bullet, Pos[i].transform.position, Pos[i].transform.rotation);
         }
