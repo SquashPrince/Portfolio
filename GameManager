@@ -1,0 +1,64 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class GameManager : MonoBehaviour {
+
+    public static int score = 0;
+
+    public Text scoreText;
+    public Text highScoreText;
+    public Text clearText;
+
+    private int savedScore = 0;
+    private string keyString = "highScore";
+
+    public GameObject Player;
+    public GameObject Boss;
+    public GameObject deadEffect;
+
+    public bool clearSwitch = false;
+    public bool deadSwitch = false;
+
+    void Awake()
+    {
+        Boss = GameObject.Find("Boss");
+        Player = GameObject.Find("Player");
+
+        savedScore =  PlayerPrefs.GetInt(keyString, 0);
+        highScoreText.text = "HIGH SCRORE : " + savedScore.ToString("000000000");
+    }
+
+    void Update () {
+                scoreText.text = " SCORE : " + score.ToString("000000000");
+
+        if(score > savedScore)
+        {
+            PlayerPrefs.SetInt(keyString, score);
+            highScoreText.text = "HIGH SCORE : " + score.ToString("000000000");
+        }
+
+        if (clearSwitch == true)
+        {
+            clearText.text = "Game Clear!!";
+            Invoke("ClearEnd", 3);
+        } // 클리어
+
+        if (deadSwitch == true)
+        {
+            Invoke("DeadEnd", 3);
+        } //사망 
+    }
+
+    public void ClearEnd()
+    {
+        SceneManager.LoadScene("ClearScene");
+    }
+
+    public void DeadEnd()
+    {
+        SceneManager.LoadScene("EndScene");
+    }
+}
