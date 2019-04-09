@@ -9,11 +9,10 @@ public class EnemyFireControll : MonoBehaviour {
     public GameObject Bullet;
 
     public float StartDelay = 1.0f;
-    public float delayTime = 1.0f;
 
     void Start()
     {
-        InvokeRepeating("Fire", StartDelay, delayTime); // 일정시간 후 메소드 실행(반복)
+        Invoke("Fire", StartDelay); // 일정시간 후 메소드 실행
     }
 
     void Fire()
