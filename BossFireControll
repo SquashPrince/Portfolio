@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BossFireControll : MonoBehaviour {
+
+    public float coolTime = 1f;
+    public float bulletCool = 0;
+
+    public GameObject[] Pos;
+    public GameObject Bullet;
+
+    void Update()
+    {
+        bulletCool += Time.deltaTime;
+
+        if(bulletCool >= coolTime)
+        {
+            Fire();
+            bulletCool = 0;
+        }
+    }
+
+    void Fire()
+    {
+            for (int j = 0; j < Pos.Length; j++)
+            {
+                Instantiate(Bullet, Pos[j].transform.position, Pos[j].transform.rotation);
+
+        }
+    }   // 총알 생성
+}
