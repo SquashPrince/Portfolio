@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ExplosionEffectControll : MonoBehaviour {
+
+    public AudioClip boomSound;
+    public AudioSource audioSource;
+
+
+
+	void Start () {
+        audioSource.PlayOneShot(boomSound, 0.25f);
+        Invoke("destroy",1.0f);	
+	}
+
+    void destroy()
+    {
+        Destroy(this.gameObject);
+    }
+}
