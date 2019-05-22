@@ -1,0 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BulletMove : MonoBehaviour {
+
+    public Transform TR;
+    public float BulletSpeed = 10f;
+
+	void Update () {
+        TR.Translate(Vector3.up * BulletSpeed * Time.deltaTime);
+	}
+}
